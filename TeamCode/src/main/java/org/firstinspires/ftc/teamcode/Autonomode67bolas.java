@@ -2,11 +2,11 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 @Autonomous
-public class Autonomode67bolas {
+public class Autonomode67bolas extends LinearOpMode {
     public DcMotor FrenteD, FrenteE, TrasE, TrasD, Intake, indexer, Catapulta1, Catapulta2;
 
     public double CATAPULTA_UP_POWER = 1.0;
@@ -14,6 +14,7 @@ public class Autonomode67bolas {
     public double CATAPULTA_HOLD_POWER = -0.15;
 
     public enum CatapultaModes {UP, DOWN, HOLD};
+        public Autonomode67bolas.CatapultaModes pivotMode = Autonomode67bolas.CatapultaModes.HOLD;
         public void HardwareMap(com.qualcomm.robotcore.hardware.HardwareMap HardwareMap) {
         FrenteE = HardwareMap.get (DcMotor.class, "FrenteE");
         FrenteD = HardwareMap.get (DcMotor.class, "FrenteD");
@@ -59,12 +60,22 @@ public class Autonomode67bolas {
                 break;
 
         }
+
+            public void stopMotors() {
+                FrenteD.setPower(0);
+                FrenteE.setPower(0);
+                TrasD.setPower(0);
+                TrasE.setPower(0);
+        }
         }
 
         public void autonomous(int DFrente, int EFrente, int ETras, int DTras, double Dpower, double Epower, int indexer, int IntakeP, int CatapultaModes) {
 
             FrenteD.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             FrenteE.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            TrasD.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            TrasE.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
         }
 
 
