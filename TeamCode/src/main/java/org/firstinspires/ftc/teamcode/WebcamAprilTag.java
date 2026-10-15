@@ -29,7 +29,7 @@ public class WebcamAprilTag extends LinearOpMode {
                 .addProcessor(myAprilTagProcessor)
                 .setCameraResolution(new Size(640, 480))
                 .setStreamFormat(VisionPortal.StreamFormat.YUY2)
-                .enable(true)
+                //.enable(true)
                 .setAutoStopLiveView(true)
                 .build();
 

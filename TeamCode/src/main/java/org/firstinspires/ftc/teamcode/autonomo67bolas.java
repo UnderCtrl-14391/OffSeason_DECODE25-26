@@ -8,8 +8,8 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-@Autonomous
-public class Autonomode67bolas extends LinearOpMode {
+@Autonomous (name = "autonomode67bolas", group = "Autonomous" )
+public class autonomode67bolas extends LinearOpMode {
 
     private final ElapsedTime runtime = new ElapsedTime();
     public DcMotor FrenteD, FrenteE, TrasE, TrasD, IntakeE, IntakeD, Catapulta1, Catapulta2;
@@ -19,8 +19,8 @@ public class Autonomode67bolas extends LinearOpMode {
     public double CATAPULTA_HOLD_POWER = -0.15;
 
     public enum CatapultaModes {UP, DOWN, HOLD};
-        public Autonomode67bolas.CatapultaModes pivotMode = Autonomode67bolas.CatapultaModes.HOLD;
-        public void initHardware(com.qualcomm.robotcore.hardware.HardwareMap HardwareMap) {
+    public autonomode67bolas.CatapultaModes pivotMode = autonomode67bolas.CatapultaModes.HOLD;
+    public void initHardware(com.qualcomm.robotcore.hardware.HardwareMap HardwareMap) {
         FrenteE = HardwareMap.get (DcMotor.class, "FrenteE");
         FrenteD = HardwareMap.get (DcMotor.class, "FrenteD");
         TrasE = HardwareMap.get (DcMotor.class, "TrasE");
@@ -66,73 +66,73 @@ public class Autonomode67bolas extends LinearOpMode {
 
         }
     }
-            public void stopMotors() {
-                FrenteD.setPower(0);
-                FrenteE.setPower(0);
-                TrasD.setPower(0);
-                TrasE.setPower(0);
-        }
+    public void stopMotors() {
+        FrenteD.setPower(0);
+        FrenteE.setPower(0);
+        TrasD.setPower(0);
+        TrasE.setPower(0);
+    }
 
-            public void stopResetMotors() {
+    public void stopResetMotors() {
 
-                TrasD.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                FrenteD.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                FrenteE.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                TrasE.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            }
-
-
-        public void autonomous(int DFrente, int EFrente, int ETras, int DTras, double Dpower, double Epower, int EIntake, int DIntake, int IntakeP, CatapultaModes CatapultaPower, double timerLimit) {
-
-            FrenteD.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            FrenteE.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            TrasD.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            TrasE.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        TrasD.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        FrenteD.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        FrenteE.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        TrasE.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    }
 
 
-            FrenteD.setTargetPosition(DFrente);
-            FrenteE.setTargetPosition(EFrente);
-            TrasE.setTargetPosition(ETras);
-            TrasD.setTargetPosition(DTras);
+    public void autonomous(int DFrente, int EFrente, int ETras, int DTras, double Dpower, double Epower, int EIntake, int DIntake, int IntakeP, CatapultaModes CatapultaPower, double timerLimit) {
 
-            FrenteD.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            FrenteE.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            TrasE.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            TrasD.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        FrenteD.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        FrenteE.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        TrasD.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        TrasE.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-            FrenteD.setPower(DFrente);
-            FrenteE.setPower(EFrente);
-            TrasE.setPower(ETras);
-            TrasD.setPower(DTras);
 
-            IntakeD.setPower(DIntake);
-            IntakeE.setPower(EIntake);
+        FrenteD.setTargetPosition(DFrente);
+        FrenteE.setTargetPosition(EFrente);
+        TrasE.setTargetPosition(ETras);
+        TrasD.setTargetPosition(DTras);
 
-            setCatapultaModes(CatapultaPower);
+        FrenteD.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        FrenteE.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        TrasE.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        TrasD.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-            resetRuntime();
+        FrenteD.setPower(DFrente);
+        FrenteE.setPower(EFrente);
+        TrasE.setPower(ETras);
+        TrasD.setPower(DTras);
 
-            stopMotors();
+        IntakeD.setPower(DIntake);
+        IntakeE.setPower(EIntake);
 
-        }
+        setCatapultaModes(CatapultaPower);
 
-        public void CatapultaModes(){
+        resetRuntime();
 
-            setCatapultaModes(CatapultaModes.DOWN);
-            sleep(100);
+        stopMotors();
 
-            setCatapultaModes(CatapultaModes.UP);
-            sleep(100);
+    }
 
-        }
-        @Override
-        public void runOpMode() {
+    public void CatapultaModes(){
 
-            initHardware(hardwareMap);
-            waitForStart();
+        setCatapultaModes(CatapultaModes.DOWN);
+        sleep(100);
 
-            autonomous(1000,1000,1000,1000,1.0,1.0,1,1,1, CatapultaModes.UP,1000);
-        }
-        }
+        setCatapultaModes(CatapultaModes.UP);
+        sleep(100);
+
+    }
+    @Override
+    public void runOpMode() {
+
+        initHardware(hardwareMap);
+        waitForStart();
+
+        autonomous(1000,1000,1000,1000,1.0,1.0,1,1,1, CatapultaModes.UP,1000);
+    }
+}
 
 
